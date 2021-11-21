@@ -5,6 +5,7 @@ on:
     branches: [ master ]
 #   pull_request:
 #     branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,7 +28,7 @@ jobs:
       uses: chkfung/android-version-actions@v1.1
       with:
         gradlePath: app/build.gradle
-        versionCode: ${{5+${{github.run_number}}}}
+        versionCode: ${{github.run_number} + 5}
         
 #     - name: update version file
 #       run: |
