@@ -26,7 +26,7 @@ jobs:
       
     - name: Calcuate version code and set env
       run: |
-        $version = (5 + $Env:GITHUB_RUN_NUMBER)
+        $version = $(5 + $Env:GITHUB_RUN_NUMBER)
         echo $version
         echo "versionCode=$version" >> $GITHUB_ENV
       
