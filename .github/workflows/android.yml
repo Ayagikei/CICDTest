@@ -25,14 +25,17 @@ jobs:
       run: chmod +x gradlew
       
     - name: Calcuate version code and set env
+      env:
+          NUM: ${{ github.run_number }}
       run: |
-        echo "versionCode=$(10+$($Env:GITHUB_RUN_NUMBER))" >> $GITHUB_ENV
+          echo ::set-env name=GITHUB_RUN_NUMBER_WITH_OFFSET::$(($NUM+200))
+    - run: echo $GITHUB_RUN_NUMBER_WITH_OFFSET
       
     - name: Bump version
       uses: chkfung/android-version-actions@v1.1
       with:
         gradlePath: app/build.gradle
-        versionCode: ${{ env.versionCode }}
+        versionCode: ${{ env.GITHUB_RUN_NUMBER_WITH_OFFSET }}
         
 #     - name: update version file
 #       run: |
