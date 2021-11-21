@@ -28,14 +28,14 @@ jobs:
       env:
           NUM: ${{ github.run_number }}
       run: |
-          echo ::set-env name=GITHUB_RUN_NUMBER_WITH_OFFSET::$(($NUM+200))
-    - run: echo $GITHUB_RUN_NUMBER_WITH_OFFSET
+          echo "versionCode=$(($NUM+200))" >> $GITHUB_ENV
+    - run: echo $versionCode
       
     - name: Bump version
       uses: chkfung/android-version-actions@v1.1
       with:
         gradlePath: app/build.gradle
-        versionCode: ${{ env.GITHUB_RUN_NUMBER_WITH_OFFSET }}
+        versionCode: ${{ env.versionCode }}
         
 #     - name: update version file
 #       run: |
